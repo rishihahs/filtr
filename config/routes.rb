@@ -1,4 +1,11 @@
 Filtr::Application.routes.draw do
+  get "email/index"
+  get "email/filter"
+  
+  match 'email/filter' => 'email#filter'
+  
+  root :to => "email#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

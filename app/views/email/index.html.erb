@@ -1,0 +1,49 @@
+<%= form_tag(email_filter_path, :class => 'wufoo', :remote => true) do %>
+
+	<div class="info">
+    <h2>Filter Emails</h2>
+    <div>Filters emails mixed in with other junk</div>
+  </div>
+
+	<ul>
+
+	<li>
+	<%= label_tag(:text, "Text with emails:", :class => 'desc') %>
+		<div>
+      <%= text_area_tag(:text, nil, :rows => 20, :cols => 50, 
+                        :class => "field textarea large") %>
+		</div>
+
+		<p class="instruct">
+      Paste in your large mess of text, and then click 'Filter' to filter out the emails.
+    </p>
+	</li>
+	
+	<li>
+	  <%= label_tag(:type, "Type:", :class => 'desc') %>
+    <% [ 'csv', 'multi_line' ].each do |type| %>
+      <%= radio_button_tag 'type', type, (session[:type] || 'csv') == type %>
+      <%= label_tag "type_#{type}", type.humanize %>
+    <% end %><br/>
+  </li>
+	
+	<li class="buttons">
+    <%= submit_tag("Filter") %>
+  </li>
+  
+  <% if session[:emails].blank? %>
+  <li id="emails" style="display:none">
+  <% else %>
+  <li id="emails">
+  <% end %>
+  
+	<%= label_tag(:emails, "Filtered emails:", :class => 'desc') %>
+		<div>
+      <%= text_area_tag(:emails, emails(get_emails()), :rows => 20, :cols => 50, 
+                        :class => "field textarea small") %>
+		</div>
+	</li>
+
+  </ul>
+  
+<% end %>

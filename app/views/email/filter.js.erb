@@ -1,0 +1,19 @@
+<% if session[:emails].blank? %>
+  notice();
+  $('#emails').fadeOut();
+<% else %>
+  $('#emails').fadeIn();
+  $('#emails textarea').val('<%= escape_javascript(emails(get_emails())).html_safe %>');
+<% end %>
+
+function notice() {
+  if ($('p#notice').length > 0)
+    $('p#notice').text('No emails found');
+  else
+    $('#main').prepend('<p id="notice" style="display:none">No emails found</p>');
+    $('p#notice').fadeIn();
+    
+  $('p#notice').click(function() {
+    $(this).fadeOut();
+  });
+}
