@@ -2,6 +2,7 @@
   notice();
   $('#emails').fadeOut();
 <% else %>
+  notice_remove();
   $('#emails').fadeIn();
   $('#emails textarea').val('<%= escape_javascript(emails(get_emails())).html_safe %>');
 <% end %>
@@ -16,4 +17,9 @@ function notice() {
   $('p#notice').click(function() {
     $(this).fadeOut();
   });
+}
+
+function notice_remove() {
+  if ($('p#notice').length > 0)
+    $('p#notice').fadeOut();
 }

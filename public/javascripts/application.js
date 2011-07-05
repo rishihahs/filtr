@@ -8,5 +8,6 @@ $(function() {
         $('#emails').hide();
         
   // Submit form on change
+  $('textarea:first').change(function(){ $(this).closest('form').submit(); });
   
 });
